@@ -14,7 +14,7 @@
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/lib/font-awesome-4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/semantic.js"></script>
-    </head>trt
+    </head>
     <body>
         <div class="ui bottom attached segment pushable">
             <div class="ui visible labeled icon inverted left vertical sidebar menu">
