@@ -15,7 +15,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/semantic.js"></script>
     </head>
-    <body>
+    <body>dfsd
         <div class="ui bottom attached segment pushable">
             <div class="ui visible labeled icon inverted left vertical sidebar menu">
                 <a class="item">
