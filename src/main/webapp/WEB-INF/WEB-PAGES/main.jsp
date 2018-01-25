@@ -15,7 +15,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/semantic.js"></script>
     </head>
-    <body>dfsd
+    <body>
         <div class="ui bottom attached segment pushable">
             <div class="ui visible labeled icon inverted left vertical sidebar menu">
                 <a class="item">
@@ -31,7 +31,7 @@
                     Работники
                 </a>
                 <a class="item">
-                    <i class="fa fa-list-alt fa-3x"></i>
+                    <i class="fa fa-print fa-3x"></i>
                     <br/><br/>
                     Отчеты
                 </a>
@@ -40,8 +40,13 @@
                     <br/><br/>
                     Календарь
                 </a>
+                <a class="item">
+                    <i class="fa fa-wrench fa-3x"></i>
+                    <br/><br/>
+                    Настройки
+                </a>
                 <a class="item" href="${pageContext.request.contextPath}">
-                    <i class="fa fa-times fa-3x"></i>
+                    <i class="fa fa-sign-out  fa-3x"></i>
                     <br/><br/>
                     Выход
                 </a>
