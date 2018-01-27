@@ -32,6 +32,25 @@ public class Employee {
     //пол
     private Gender gender;
 
+    public Employee() {
+    }
+
+    public Employee(Long id, String name, String patronymic, String sirname, 
+            String profession, double wage_rate, LocalDate birthDate, 
+            List<Period> period, Gender gender) {
+        this.id = id;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.sirname = sirname;
+        this.profession = profession;
+        this.wage_rate = wage_rate;
+        this.birthDate = birthDate;
+        this.period = period;
+        this.gender = gender;
+    }
+    
+    
+
     public String getName() {
         return name;
     }
@@ -103,10 +122,14 @@ public class Employee {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", name=" + name + ", patronymic=" + patronymic + ", sirname=" + sirname + ", profession=" + profession + ", wage_rate=" + wage_rate + ", birthDate=" + birthDate + ", period=" + period + ", gender=" + gender + '}';
+    }
     
     public enum Gender{
         MAN, WOMAN;
     }
-    
     
 }

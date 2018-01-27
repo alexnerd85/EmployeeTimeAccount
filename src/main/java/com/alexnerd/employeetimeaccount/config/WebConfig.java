@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
-//@ComponentScan(basePackages={"com.alexnerd.employeetimeaccount"})
+@ComponentScan(basePackages={"com.alexnerd.employeetimeaccount"})
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Override
