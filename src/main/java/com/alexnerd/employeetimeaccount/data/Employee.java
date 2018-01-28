@@ -3,17 +3,27 @@
  *   Author     : Popov Aleksey
  *   Site       : alexnerd.com
  *   Email      : alexnerd85@gmail.com
- *   GitHub     : https://github.com/alexnerd85/EQueue
+ *   GitHub     : https://github.com/alexnerd85/EmployeeTimeAccount
  */
 
-package com.alexnerd.employeetimeaccount.data.employee;
+package com.alexnerd.employeetimeaccount.data;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-
+@Entity
 public class Employee {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     //имя
     private String name;
@@ -26,10 +36,11 @@ public class Employee {
     //количество занимаемых ставок
     private double wage_rate;
     //дата рождения
-    private LocalDate birthDate;
+    //private LocalDate birthDate;
     //периоды отсутствия
-    private List<Period> period;
+    //private List<Period> period;
     //пол
+    @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
     public Employee() {
@@ -44,8 +55,8 @@ public class Employee {
         this.sirname = sirname;
         this.profession = profession;
         this.wage_rate = wage_rate;
-        this.birthDate = birthDate;
-        this.period = period;
+        //this.birthDate = birthDate;
+        //this.period = period;
         this.gender = gender;
     }
     
@@ -74,7 +85,7 @@ public class Employee {
     public void setSirname(String sirname) {
         this.sirname = sirname;
     }
-
+/*
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -82,7 +93,7 @@ public class Employee {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-
+    */
     public Long getId() {
         return id;
     }
@@ -107,6 +118,7 @@ public class Employee {
         this.wage_rate = wage_rate;
     }
 
+    /*
     public List<Period> getPeriod() {
         return period;
     }
@@ -114,6 +126,7 @@ public class Employee {
     public void setPeriod(List<Period> period) {
         this.period = period;
     }
+    */
 
     public Gender getGender() {
         return gender;
@@ -125,7 +138,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", name=" + name + ", patronymic=" + patronymic + ", sirname=" + sirname + ", profession=" + profession + ", wage_rate=" + wage_rate + ", birthDate=" + birthDate + ", period=" + period + ", gender=" + gender + '}';
+        return "Employee{" + "id=" + id + ", name=" + name + ", patronymic=" + patronymic + ", sirname=" + sirname + ", profession=" + profession + ", wage_rate=" + wage_rate + ", birthDate=" + ", period=" + ", gender=" + gender + '}';
     }
     
     public enum Gender{

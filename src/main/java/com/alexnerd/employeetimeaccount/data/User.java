@@ -3,10 +3,10 @@
  *   Author     : Popov Aleksey
  *   Site       : alexnerd.com
  *   Email      : alexnerd85@gmail.com
- *   GitHub     : https://github.com/alexnerd85/EQueue
+ *   GitHub     : https://github.com/alexnerd85/EmployeeTimeAccount
  */
 
-package com.alexnerd.employeetimeaccount.data.user;
+package com.alexnerd.employeetimeaccount.data;
 
 public class User {
     private Long id;

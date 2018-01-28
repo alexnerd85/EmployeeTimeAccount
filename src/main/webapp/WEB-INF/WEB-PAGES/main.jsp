@@ -1,7 +1,9 @@
 <%-- 
-    Document   : main
     Created on : 21.01.2018, 21:51:05
-    Author     : Aleksey
+    Author     : Popov Aleksey
+    Site       : alexnerd.com
+    Email      : alexnerd85@gmail.com
+    GitHub     : https://github.com/alexnerd85/EmployeeTimeAccount 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

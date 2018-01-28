@@ -3,7 +3,7 @@
  *   Author     : Popov Aleksey
  *   Site       : alexnerd.com
  *   Email      : alexnerd85@gmail.com
- *   GitHub     : https://github.com/alexnerd85/EQueue
+ *   GitHub     : https://github.com/alexnerd85/EmployeeTimeAccount
  */
 
 package com.alexnerd.employeetimeaccount.config;
