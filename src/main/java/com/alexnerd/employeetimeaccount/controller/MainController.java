@@ -26,9 +26,10 @@ public class MainController {
     @Qualifier("employeeService")
     private EmployeeService employeeService;
 
-    @RequestMapping(value="/main")
+    //@RequestMapping(value="/app/main")
+    @RequestMapping(value="/")
     public ModelAndView getTestJsp(){
-        ModelAndView model = new ModelAndView("main");
+        ModelAndView model = new ModelAndView("app/main");
         employeeService.addEmployee("Меня");
         model.addObject("employees", EmployeeSupport.getEmployees());
         return model;

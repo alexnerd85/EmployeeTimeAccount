@@ -36,7 +36,7 @@ public class Employee {
     //количество занимаемых ставок
     private double wage_rate;
     //дата рождения
-    //private LocalDate birthDate;
+    private LocalDate birthDate;
     //периоды отсутствия
     //private List<Period> period;
     //пол
@@ -55,7 +55,7 @@ public class Employee {
         this.sirname = sirname;
         this.profession = profession;
         this.wage_rate = wage_rate;
-        //this.birthDate = birthDate;
+        this.birthDate = birthDate;
         //this.period = period;
         this.gender = gender;
     }
@@ -85,7 +85,7 @@ public class Employee {
     public void setSirname(String sirname) {
         this.sirname = sirname;
     }
-/*
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -93,7 +93,7 @@ public class Employee {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-    */
+    
     public Long getId() {
         return id;
     }
@@ -138,7 +138,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", name=" + name + ", patronymic=" + patronymic + ", sirname=" + sirname + ", profession=" + profession + ", wage_rate=" + wage_rate + ", birthDate=" + ", period=" + ", gender=" + gender + '}';
+        return "Employee{" + "id=" + id + ", name=" + name + ", patronymic=" + patronymic + ", sirname=" + sirname + ", profession=" + profession + ", wage_rate=" + wage_rate + ", birthDate=" + birthDate + ", period=" + ", gender=" + gender + '}';
     }
     
     public enum Gender{

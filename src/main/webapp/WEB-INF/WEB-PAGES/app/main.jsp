@@ -54,7 +54,8 @@
                     <br/><br/>
                     Настройки
                 </a>
-                <a class="item" href="${pageContext.request.contextPath}">
+                    
+                <a class="item" href="<c:url value="/logout"/>">
                     <i class="fa fa-sign-out  fa-3x"></i>
                     <br/><br/>
                     Выход
