@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="ui bottom attached segment pushable">
-            <div class="ui visible labeled icon inverted left vertical sidebar menu">
+            <div class="ui thin visible left vertical inverted sidebar labeled icon menu">
                 <a class="item">
                     <%--<i class="dashboard icon"></i>--%>
                     <i class="fa fa-tachometer fa-3x" aria-hidden="true"></i>
@@ -54,47 +54,58 @@
                     <br/><br/>
                     Настройки
                 </a>
-                    
+
                 <a class="item" href="<c:url value="/logout"/>">
                     <i class="fa fa-sign-out  fa-3x"></i>
                     <br/><br/>
                     Выход
                 </a>
             </div>
-            <div class="ui container">
+            <div class="pusher">
                 <div class="ui basic segment">
-                    <table class="ui sortable celled table">
-                        <thead>
-                            <tr>
-                                <th>Фамилия</th>
-                                <th>Имя</th>
-                                <th>Отчество</th>
-                                <th>Специальность</th>
-                                <th>Оклад</th>
-                                <th>Дата рождения</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="employee" items="${employees}">
-                                <tr>
-                                    <td>${employee.sirname}</td>
-                                    <td>${employee.name}</td>
-                                    <td>${employee.patronymic}</td>
-                                    <td>${employee.profession}</td>
-                                    <td>${employee.wage_rate}</td>
-                                    <td>${employee.birthDate}</td>
-                                </tr>
-                            </c:forEach>
-                        <tfoot>
-                            <tr>
-                                <th colspan="6">Количество сотрудников: ${employees.size()}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <div class="ui right floated small primary labeled icon button">
-                        <i class="add user icon"></i> 
-                        Добавить
+                    <div class="ui grid">
+                        <div class="fourteen wide column">
+                            <h3 class="ui header">Application Content</h3>
+                            <table class="ui sortable celled table">
+                                <thead>
+                                    <tr>
+                                        <th>Фамилия</th>
+                                        <th>Имя</th>
+                                        <th>Отчество</th>
+                                        <th>Специальность</th>
+                                        <th>Оклад</th>
+                                        <th>Дата рождения</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="employee" items="${employees}">
+                                        <tr>
+                                            <td>${employee.sirname}</td>
+                                            <td>${employee.name}</td>
+                                            <td>${employee.patronymic}</td>
+                                            <td>${employee.profession}</td>
+                                            <td>${employee.wage_rate}</td>
+                                            <td>${employee.birthDate}</td>
+                                        </tr>
+                                    </c:forEach>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="6">Количество сотрудников: ${employees.size()}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="ui right floated small primary labeled icon button">
+                                <i class="add user icon"></i> 
+                                Добавить
+                            </div>    
+                        </div>
                     </div>
+
+                    <p></p>
+
+                    <p></p>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
         </div>
