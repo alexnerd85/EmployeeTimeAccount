@@ -38,7 +38,8 @@ public class MainController {
         ModelAndView model = new ModelAndView("app/main");
         employeeService.addEmployee("Меня");
         model.addObject("employees", EmployeeSupport.getEmployees());
-        return model;
+        throw new RuntimeException("Test");
+        //return model;
     }
     
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
