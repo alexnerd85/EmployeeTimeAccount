@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -23,17 +24,19 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages={"com.alexnerd.employeetimeaccount"})
-@Import({ApplicationContext.class})
+@Import({ApplicationContext.class, SecurityConfig.class})
 @PropertySource("classpath:DataSource.properties")
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //registry.addViewController("/").setViewName("app/main");
+        registry.addViewController("/login").setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         //registry.addViewController("/").setViewName("index");
-        registry.addViewController("/");
-        registry.addViewController("/app/main").setViewName("app/main");
-        registry.addViewController("/accessDenied").setViewName("accessDenied");
+        //registry.addViewController("/");
+        //registry.addViewController("/app/main").setViewName("app/main");
+        //registry.addViewController("/accessDenied").setViewName("accessDenied");
     }
 
     @Override

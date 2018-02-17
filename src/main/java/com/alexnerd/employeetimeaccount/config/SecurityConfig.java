@@ -8,6 +8,7 @@
 package com.alexnerd.employeetimeaccount.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -15,60 +16,37 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    
+     @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/resources/**", "/registration", "/checklogin", "/user/**").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username").passwordParameter("password")
+                .permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
+                .permitAll()
+                .and()
+                .sessionManagement().sessionFixation().changeSessionId()
+                .and().csrf();
+    }
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.userDetailsService(inMemoryUserDetailsManager());
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
+         auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
 
-        /*
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("password").roles("ADMIN");
-        */
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        /*
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/app/**").hasRole("ADMIN")
-                .antMatchers("/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                //.httpBasic()
-                .formLogin()
-                .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied");
-        */
-        /*
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/app/**").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied");
-        */
-        
-        http
-            .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                //.loginPage("/login")
-                .permitAll()
-                .and()
-            .logout()                                    
-                .permitAll()
-            .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied");
-    }
 
+   
     /*
     @Override
     public void configure(WebSecurity web) throws Exception {
