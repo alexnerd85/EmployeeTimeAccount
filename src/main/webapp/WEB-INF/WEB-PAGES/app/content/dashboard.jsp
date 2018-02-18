@@ -64,7 +64,7 @@
                 <div class="ui segment">
                     <h4 class="ui header">
                         <i class="checked calendar icon"></i>
-                        <div class="content">Ближайшие отсутствия 2</div>
+                        <div class="content">Ближайшие отсутствия</div>
                         </h2>
                 </div>
                 <div class="ui segments">
@@ -87,8 +87,88 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        
+    <div class="row">        
+        <div class="five wide column">
+            <div class="ui raised segments">
+                <div class="ui segment">
+                    <h4 class="ui header">
+                        <i class="checked calendar icon"></i>
+                        <div class="content">Дни рождения</div>
+                        </h2>
+                </div>
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <p>День рождения</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>День рождения</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>День рождения</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>День рождения</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>День рождения</p>
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="ui raised segments">
+                <div class="ui segment">
+                    <h4 class="ui header">
+                        <i class="checked calendar icon"></i>
+                        <div class="content">Праздники</div>
+                        </h2>
+                </div>
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <p>Праздники</p>
+                    </div>
+                    <div class="ui segment">
+                         <p>Праздники</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Праздники</p>
+                    </div>
+                    <div class="ui segment">
+                         <p>Праздники</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Праздники</p>
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui raised segments">
+                <div class="ui segment">
+                    <h4 class="ui header">
+                        <i class="checked calendar icon"></i>
+                        <div class="content">Выход на работу</div>
+                        </h2>
+                </div>
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <p>Выход на работу</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Выход на работу</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Выход на работу</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Выход на работу</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>Выход на работу</p>
+                    </div>                        
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -37,7 +37,6 @@
         </script>
     </head>
     <body>
-        <div class="ui bottom attached segment pushable">
             <div class="ui thin visible left vertical inverted sidebar labeled icon menu">
                 <a class="item" href="<c:url value="/dashboard"/>">
                     <i class="fa fa-tachometer fa-3x" aria-hidden="true"></i>
@@ -71,7 +70,10 @@
                     Выход
                 </a>
             </div>
-            <div class="pusher" style="margin: 10px;"></div>
+            <div class="pusher" style="margin: 10px;">
+                
+            </div>
         </div>
+        
     </body>
 </html>
