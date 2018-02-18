@@ -42,6 +42,29 @@ public class MainController {
         return model;
     }
     
+    @RequestMapping(value="/dashboard")
+    public String getDashboardPage(){
+        return "app/content/dashboard";
+    }
+    
+    @RequestMapping(value="/employers")
+    public String getEmployersPage(){
+        return "app/content/employers";
+    }
+    @RequestMapping(value="/reports")
+    public String getReportsPage(){
+        return "app/content/reports";
+    }
+    @RequestMapping(value="/calendar")
+    public String getCalendarPage(){
+        return "app/content/calendar";
+    }
+    
+    @RequestMapping(value="/settings")
+    public String getSettingsPage(){
+        return "app/content/settings";
+    }
+    
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
