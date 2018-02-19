@@ -8,32 +8,71 @@
 
 package com.alexnerd.employeetimeaccount.data;
 
-public class User {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id", unique=true, nullable=false)
     private Long id;
+    
     //логин
+    @Column(name="login", unique=true, nullable=false)
     private String login;
+    
     //пароль
+    @Column(name="password", nullable=false)
     private String password;
+    
     //имя
+    @Column(name="name")
     private String name;
+    
     //отчество
+    @Column(name="patronymic")
     private String patronymic;
+    
     //фамилия
+    @Column(name="sirname")
     private String sirname;
-    //специальность
-    private String profession;
+    
+    @Column(name="enabled", nullable=false)
+    private boolean enabled;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name="userRole", nullable=false)
+    private UserRole userRole;
 
     public User() {
     }
+    
+    public User(String login, String password, boolean enabled, UserRole userRole){
+        this.login = login;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
 
     public User(String login, String password, String name, String patronymic, 
-            String sirname, String profession) {
+            String sirname, boolean enabled, UserRole userRole) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.patronymic = patronymic;
         this.sirname = sirname;
-        this.profession = profession;
+        this.enabled = enabled;
+        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -84,12 +123,24 @@ public class User {
         this.sirname = sirname;
     }
 
-    public String getProfession() {
-        return profession;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public UserRole getUserRoles() {
+        return userRole;
+    }
+
+    public void setUserRoles(UserRole userRole) {
+        this.userRole = userRole;
+    }
+    
+    public enum UserRole {
+        USER, ADMIN    
     }
     
 }

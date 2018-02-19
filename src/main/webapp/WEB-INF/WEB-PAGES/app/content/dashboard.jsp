@@ -11,9 +11,9 @@
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: ["Март", "Апрель", "Май", "Июнь", "Август", "Сентябрь"],
             datasets: [{
-                    label: '# of Votes',
+                    label: 'Количество отсутсвий',
                     data: [12, 19, 3, 5, 2, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

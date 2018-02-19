@@ -1,5 +1,5 @@
 /*
- *   Created on : 28.01.2018, 23:09:24
+ *   Created on : 19.02.2018, 19:14:42
  *   Author     : Popov Aleksey
  *   Site       : alexnerd.com
  *   Email      : alexnerd85@gmail.com
@@ -8,24 +8,24 @@
 
 package com.alexnerd.employeetimeaccount.dao;
 
-import com.alexnerd.employeetimeaccount.data.Employee;
+import com.alexnerd.employeetimeaccount.data.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
-@Repository("employeeDAO")
+@Repository("userDAO")
 @Transactional
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class UserDAOImpl implements UserDAO {
 
     @PersistenceContext
     public EntityManager entityManager;
-
+    
     @Transactional(readOnly = false)
     @Override
-    public Employee addEmployee(Employee employee) {
-        entityManager.persist(employee);
-        return employee;
+    public User addUser(User user) {
+        entityManager.persist(user);
+        return user;
     }
+    
 }

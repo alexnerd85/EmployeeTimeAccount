@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
-@ComponentScan(basePackages={"com.alexnerd.employeetimeaccount.services",
+@ComponentScan(basePackages={"com.alexnerd.employeetimeaccount.daoServices",
                             "com.alexnerd.employeetimeaccount.dao"})
 @EnableTransactionManagement
 public class ApplicationContext {

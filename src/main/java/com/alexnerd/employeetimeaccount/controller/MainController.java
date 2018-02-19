@@ -8,10 +8,7 @@
 
 package com.alexnerd.employeetimeaccount.controller;
 
-import com.alexnerd.employeetimeaccount.data.Employee;
-import com.alexnerd.employeetimeaccount.services.EmployeeService;
 import com.alexnerd.employeetimeaccount.utils.EmployeeSupport;
-import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +20,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import com.alexnerd.employeetimeaccount.daoServices.EmployeeDAOService;
+import com.alexnerd.employeetimeaccount.daoServices.UserDAOService;
+import com.alexnerd.employeetimeaccount.data.User;
 
 
 @Controller
 public class MainController {
     
     @Autowired(required=true)
-    @Qualifier("employeeService")
-    private EmployeeService employeeService;
+    @Qualifier("employeeDAOService")
+    private EmployeeDAOService employeeDAOService;
+    
+    
+    @Autowired(required=true)
+    @Qualifier("userDAOService")
+    private UserDAOService userDAOService;
+    
 
     //@RequestMapping(value="/app/main")
     @RequestMapping(value="/")
     public ModelAndView getTestJsp(){
         ModelAndView model = new ModelAndView("app/main");
-        employeeService.addEmployee("Меня");
+        employeeDAOService.addEmployee("Василий", "Пупкин", "Водитель", 2);
+        userDAOService.addUser("user", "password", true, User.UserRole.USER);
         model.addObject("employees", EmployeeSupport.getEmployees());
         //throw new RuntimeException("Test");
         return model;

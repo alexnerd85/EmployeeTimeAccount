@@ -8,47 +8,80 @@
 
 package com.alexnerd.employeetimeaccount.data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Employee {
+@Table(name="employees")
+public class Employee implements Serializable {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id", unique=true, nullable=false)
     private Long id;
+    
     //имя
+    @Column(name="name", nullable=false)
     private String name;
+    
     //отчество
+    @Column(name="patronymic")
     private String patronymic;
+    
     //фамилия
+    @Column(name="sirname", nullable=false)
     private String sirname;
+    
     //специальность
+    @Column(name="profession", nullable=false)
     private String profession;
+    
     //количество занимаемых ставок
+    @Column(name="wage_rate", nullable=false)
     private double wage_rate;
+    
     //дата рождения
+    @Column(name="birthDate")
     private LocalDate birthDate;
+    
     //периоды отсутствия
-    //private List<Period> period;
+    //private List<Period> periods;
+    
     //пол
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
     public Employee() {
+    
+    }
+    
+    public Employee(String name, String sirname, String profession, double wage_rate){
+        this.name = name;
+        this.sirname = sirname;
+        this.profession = profession;
+        this.wage_rate = wage_rate;
     }
 
     public Employee(Long id, String name, String patronymic, String sirname, 
             String profession, double wage_rate, LocalDate birthDate, 
-            List<Period> period, Gender gender) {
+            List<Period> periods, Gender gender) {
         this.id = id;
         this.name = name;
         this.patronymic = patronymic;
@@ -56,11 +89,9 @@ public class Employee {
         this.profession = profession;
         this.wage_rate = wage_rate;
         this.birthDate = birthDate;
-        //this.period = period;
+        //this.periods = periods;
         this.gender = gender;
     }
-    
-    
 
     public String getName() {
         return name;
@@ -119,15 +150,29 @@ public class Employee {
     }
 
     /*
-    public List<Period> getPeriod() {
-        return period;
+    @ElementCollection
+    @CollectionTable(name="periods", joinColumns=@JoinColumn(name="id"))
+    @Column(name="periods")
+    public List<Period> getPeriods() {
+        return periods;
     }
 
-    public void setPeriod(List<Period> period) {
-        this.period = period;
+    public void setPeriod(List<Period> periods) {
+        this.periods = periods;
+    }
+    
+    public boolean addPeriod(Period period){
+        synchronized(this.periods){
+            return periods.add(period);
+        }
+    }
+    
+    public boolean removePeriod(Period period){
+        synchronized(this.periods){
+            return periods.remove(period);
+        }
     }
     */
-
     public Gender getGender() {
         return gender;
     }

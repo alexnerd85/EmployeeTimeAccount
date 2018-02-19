@@ -1,5 +1,5 @@
 /*
- *   Created on : 28.01.2018, 23:09:24
+ *   Created on : 19.02.2018, 19:13:36
  *   Author     : Popov Aleksey
  *   Site       : alexnerd.com
  *   Email      : alexnerd85@gmail.com
@@ -8,8 +8,8 @@
 
 package com.alexnerd.employeetimeaccount.dao;
 
-import com.alexnerd.employeetimeaccount.data.Employee;
+import com.alexnerd.employeetimeaccount.data.User;
 
-public interface EmployeeDAO {
-    public Employee addEmployee(Employee employee);    
+public interface UserDAO {
+    public User addUser(User user);
 }
