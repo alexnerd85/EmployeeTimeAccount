@@ -70,12 +70,16 @@
                             <c:url var="loginUrl" value="/login" />
                             <form class="ui form" action="${loginUrl}" method="POST">
                                 <div class="field">
-                                    <label>Логин</label>
-                                    <input type="text" id="username" name="username" placeholder="Введите Логин" required>
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" id="username" name="username" placeholder="Логин" required>
+                                    </div>
                                 </div>
                                 <div class="field">
-                                    <label>Пароль</label>
-                                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                                    <div class="ui left icon input">
+                                        <i class="lock icon"></i>
+                                        <input type="password" id="password" name="password" placeholder="Пароль" required>
+                                    </div>
                                 </div>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <div class="aligned right aligned grid">
