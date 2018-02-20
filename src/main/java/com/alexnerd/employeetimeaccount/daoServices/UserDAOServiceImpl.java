@@ -10,6 +10,8 @@ package com.alexnerd.employeetimeaccount.daoServices;
 
 import com.alexnerd.employeetimeaccount.dao.UserDAO;
 import com.alexnerd.employeetimeaccount.data.User;
+import com.alexnerd.employeetimeaccount.data.User.UserRole;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,8 +27,13 @@ public class UserDAOServiceImpl implements UserDAOService {
     
     @Override
     @Transactional
-    public User addUser(String login, String password, boolean enabled, User.UserRole userRole) {
-        return userDAO.addUser(new User(login, password, enabled, userRole));
+    public User addUser(String login, String password, boolean enabled, Set<UserRole> userRoles) {
+        return userDAO.addUser(new User(login, password, enabled, userRoles));
+    }
+
+    @Override
+    public User findUserByLogin(String login) {
+        return userDAO.findUserByLogin(login);
     }
     
 }

@@ -9,13 +9,23 @@
 package com.alexnerd.employeetimeaccount.data;
 
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,29 +60,36 @@ public class User implements Serializable {
     @Column(name="enabled", nullable=false)
     private boolean enabled;
     
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy="user")
+    //@OneToMany(fetch=EAGER, cascade=CascadeType.ALL)
+    
+    @ElementCollection(targetClass = com.alexnerd.employeetimeaccount.data.User.UserRole.class)
+    @CollectionTable(name = "user_roles", joinColumns = {
+        @JoinColumn(name = "login", referencedColumnName = "login")
+    })
     @Enumerated(EnumType.STRING)
-    @Column(name="userRole", nullable=false)
-    private UserRole userRole;
+    private Set<UserRole> userRoles;
 
     public User() {
     }
     
-    public User(String login, String password, boolean enabled, UserRole userRole){
+    public User(String login, String password, boolean enabled, Set<UserRole> userRole){
         this.login = login;
         this.password = password;
         this.enabled = enabled;
-        this.userRole = userRole;
+        this.userRoles = userRole;
     }
 
     public User(String login, String password, String name, String patronymic, 
-            String sirname, boolean enabled, UserRole userRole) {
+            String sirname, boolean enabled, Set<UserRole> userRole) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.patronymic = patronymic;
         this.sirname = sirname;
         this.enabled = enabled;
-        this.userRole = userRole;
+        this.userRoles = userRoles;
     }
 
     public Long getId() {
@@ -131,16 +148,15 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public UserRole getUserRoles() {
-        return userRole;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRoles(UserRole userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(Set<UserRole> userRole) {
+        this.userRoles = userRole;
     }
     
-    public enum UserRole {
-        USER, ADMIN    
+    public enum UserRole{
+        USER, ADMIN
     }
-    
 }

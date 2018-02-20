@@ -10,8 +10,10 @@ package com.alexnerd.employeetimeaccount.daoServices;
 
 import com.alexnerd.employeetimeaccount.data.User;
 import com.alexnerd.employeetimeaccount.data.User.UserRole;
+import java.util.Set;
 
 
 public interface UserDAOService {
-    public User addUser(String login, String password, boolean enabled, UserRole userRole);
+    public User addUser(String login, String password, boolean enabled, Set<UserRole> userRoles);
+    public User findUserByLogin(String login);
 }

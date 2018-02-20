@@ -23,6 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alexnerd.employeetimeaccount.daoServices.EmployeeDAOService;
 import com.alexnerd.employeetimeaccount.daoServices.UserDAOService;
 import com.alexnerd.employeetimeaccount.data.User;
+import com.alexnerd.employeetimeaccount.data.User.UserRole;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -42,9 +45,15 @@ public class MainController {
     @RequestMapping(value="/")
     public ModelAndView getTestJsp(){
         ModelAndView model = new ModelAndView("app/main");
-        employeeDAOService.addEmployee("Василий", "Пупкин", "Водитель", 2);
-        userDAOService.addUser("user", "password", true, User.UserRole.USER);
-        model.addObject("employees", EmployeeSupport.getEmployees());
+        //employeeDAOService.addEmployee("Василий", "Пупкин", "Водитель", 2);
+        //UserRole role = new UserRole();
+        //role.setRole("USER");
+        Set<UserRole> set = new HashSet<>();
+        set.add(UserRole.USER);
+        //userDAOService.addUser("aleksey", "123456", true, set);
+        User user = userDAOService.findUserByLogin("aleksey");
+        model.addObject("user_aleksey", user);
+        //model.addObject("employees", EmployeeSupport.getEmployees());
         //throw new RuntimeException("Test");
         return model;
     }
