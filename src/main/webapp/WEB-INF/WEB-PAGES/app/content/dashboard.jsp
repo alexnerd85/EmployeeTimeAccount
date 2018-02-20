@@ -47,8 +47,8 @@
 </script>
 
 <div class="ui equal height grid">
-    <div class="row">
-        <div class="ten wide column">
+    <div class="equal height row">
+        <div class="twelve wide column">
             <div class="ui raised segments">
                 <div class="ui segment">
                     <h4 class="ui header">

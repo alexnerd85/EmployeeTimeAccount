@@ -10,10 +10,10 @@
     <div class="row">        
         <div class="three wide column">
             <div class="ui raised segment">
-                <a class="ui blue ribbon label">Табель</a>
-                <span>Март</span>
+                <a class="ui blue ribbon label">Март</a>
+                <span>Табель</span>
                 <p></p>
-                <i class="file text big icon"></i>
+                <i class="file alternate outline big icon"></i>
                 Сформировано: 01.03.2018
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <a class="ui blue ribbon label">Табель</a>
                 <span>Апрель</span>
                 <p></p>
-                <i class="file text big icon"></i>
+                <i class="file text big outline icon"></i>
                 Сформировано: 01.04.2018
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <a class="ui blue ribbon label">Табель</a>
                 <span>Май</span>
                 <p></p>
-                <i class="file text big icon"></i>
+                <i class="file text big outline icon"></i>
                 Сформировано: 01.05.2018
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <a class="ui blue ribbon label">Табель</a>
                 <span>Июнь</span>
                 <p></p>
-                <i class="file text big icon"></i>
+                <i class="file text big outline icon"></i>
                 Сформировано: 01.06.2018
             </div>
         </div>
