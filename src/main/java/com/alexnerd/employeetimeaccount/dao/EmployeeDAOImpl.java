@@ -9,6 +9,8 @@
 package com.alexnerd.employeetimeaccount.dao;
 
 import com.alexnerd.employeetimeaccount.data.Employee;
+import java.nio.charset.Charset;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -27,5 +29,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public Employee addEmployee(Employee employee) {
         entityManager.persist(employee);
         return employee;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Employee> getAllEmployees() {
+        return (List<Employee>) entityManager
+                 .createQuery("FROM Employee")
+                 .getResultList();
+    }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public List<Employee> search(String query) {
+        return (List<Employee>) entityManager
+                 .createQuery("FROM Employee e WHERE CONCAT(e.name, e.sirname, e.profession) LIKE CONCAT('%',UPPER(?),'%')").setParameter(0, query)
+                 .getResultList();
+        
     }
 }

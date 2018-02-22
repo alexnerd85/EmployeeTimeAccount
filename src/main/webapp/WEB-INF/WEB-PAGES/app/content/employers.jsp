@@ -9,7 +9,6 @@
 <div class="ui basic segment">
     <div class="ui grid">
         <div class="fourteen wide column">
-            <h3 class="ui header">Application Content</h3>
             <table class="ui sortable celled table">
                 <thead>
                     <tr>

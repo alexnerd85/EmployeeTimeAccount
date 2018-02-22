@@ -30,10 +30,21 @@ public class UserDAOServiceImpl implements UserDAOService {
     public User addUser(String login, String password, boolean enabled, Set<UserRole> userRoles) {
         return userDAO.addUser(new User(login, password, enabled, userRoles));
     }
+    
+    @Override
+    @Transactional
+    public User addUser(User user) {
+        return userDAO.addUser(user);
+    }
 
     @Override
     public User findUserByLogin(String login) {
         return userDAO.findUserByLogin(login);
+    }
+
+    @Override
+    public boolean isLoginExist(String login) {
+        return userDAO.isLoginExist(login);
     }
     
 }

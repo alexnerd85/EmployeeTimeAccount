@@ -35,12 +35,56 @@
                     }
                 });
 
+                $('.ui.search')
+                        .search({
+                            type: 'category',
+                            minCharacters: 3,
+                            apiSettings: {
+                                url: '/EmployeeTimeAccount/employee/search?q={query}',
+                                onResponse: function (serverResponse) {
+                                    var
+                                            response = {
+                                                results: {}
+                                            }
+                                    ;
+                                    if (!serverResponse) {
+                                        return;
+                                    }
+                                    // translate GitHub API response to work with search
+                                    $.each(serverResponse, function (index, item) {
+                                        var
+                                                profession = item.profession || 'Unknown',
+                                                maxResults = 8
+                                                ;
+                                        if (index >= maxResults) {
+                                            return false;
+                                        }
+                                        // create new category
+                                        if (response.results[profession] === undefined) {
+                                            response.results[profession] = {
+                                                name: profession,
+                                                results: []
+                                            };
+                                        }
+                                        // add result to category
+                                        response.results[profession].results.push({
+                                            title: item.sirname + ' ' + item.name,
+                                            description: item.profession,
+                                            url: item.html_url
+                                        });
+                                    });
+                                    return response;
+                                }
+                            }
+                        })
+
+
             });
+
         </script>
     </head>
     <body style="margin-left: 120px; margin-top: 50px; margin-right: 20px; margin-bottom: 10px;">
         <sec:authentication var="principal" property="principal" />
-
         <div class="ui fixed inverted menu" style="margin-left: 50px;">
             <div class="ui container">
                 <div class="item">
@@ -50,17 +94,20 @@
                     </h4>
                 </div>
                 <div class="item align right">
-                    <div class="ui inverted transparent icon input">
-                        <input type="text" placeholder="Найти...">
-                        <i class="search icon"></i>
+                    <div class="ui search">
+                        <div class="ui inverted transparent icon input">
+                            <input class="prompt" type="text" placeholder="Найти...">
+                            <i class="search icon"></i>
+                        </div>
+                        <div class="results"></div>
                     </div>
                 </div>
                 <div class="item">
-                        Пользователь: 
-                        &nbsp;&nbsp;&nbsp;
-                        ${principal.username}
-                        &nbsp;&nbsp;
-                        <i class="user icon"></i>
+                    Пользователь: 
+                    &nbsp;&nbsp;&nbsp;
+                    ${principal.username}
+                    &nbsp;&nbsp;
+                    <i class="user icon"></i>
                 </div>
             </div>
 
@@ -83,10 +130,12 @@
                 <i class="calendar alternate outline icon"></i>
                 Календарь
             </a>
-            <a class="item" href="<c:url value="/settings"/>">
-                <i class="wrench outline icon"></i>
-                Настройки
-            </a>
+            <sec:authorize access="hasAuthority('ADMIN')">
+                <a class="item" href="<c:url value="/settings"/>">
+                    <i class="wrench outline icon"></i>
+                    Настройки
+                </a>
+            </sec:authorize>
 
             <a class="item" id="exit" href="<c:url value="/logout"/>">
                 <i class="sign out alternate icon"></i>

@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**", "/registration", "/checklogin", "/user/**").permitAll()
+                .antMatchers("/resources/**", "/registration", "/checklogin", "/employee/**", "/user/**").permitAll()
+                .antMatchers("/settings").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login").failureUrl("/login?error")
@@ -41,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .sessionManagement().sessionFixation().changeSessionId()
-                .and().csrf();
+                .and().exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+                .and().csrf().disable();
     }
 
     @Override

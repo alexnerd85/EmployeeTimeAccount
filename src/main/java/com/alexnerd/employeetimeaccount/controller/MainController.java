@@ -50,7 +50,7 @@ public class MainController {
         //role.setRole("USER");
         Set<UserRole> set = new HashSet<>();
         set.add(UserRole.USER);
-        //userDAOService.addUser("aleksey", "123456", true, set);
+        //userDAOService.addUser("user", "password", true, set);
         User user = userDAOService.findUserByLogin("aleksey");
         model.addObject("user_aleksey", user);
         //model.addObject("employees", EmployeeSupport.getEmployees());

@@ -11,7 +11,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Settings</title>
     </head>
+    <script>
+        
+        
+    </script>
+
     <body>
         <h1>Settings</h1>
+       
     </body>
 </html>

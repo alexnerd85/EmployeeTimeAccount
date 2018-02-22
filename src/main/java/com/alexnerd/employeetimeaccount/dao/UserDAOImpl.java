@@ -9,6 +9,7 @@ package com.alexnerd.employeetimeaccount.dao;
 
 import com.alexnerd.employeetimeaccount.data.User;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,23 @@ public class UserDAOImpl implements UserDAO {
     @Transactional(readOnly = true)
     @Override
     public User findUserByLogin(String login) {
-        Object obj = entityManager.createQuery("FROM User u WHERE u.login=?")
-                                        .setParameter(0, login)
-                                            .getSingleResult();
-        return obj == null ? null : (User)obj;
+         return (User) entityManager
+                 .createQuery("FROM User u WHERE u.login=?")
+                 .setParameter(0, login)
+                 .getResultList()
+                 .stream()
+                 .findFirst()
+                 .orElse(null);
+                                            
+    }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public boolean isLoginExist(String login) {
+        Long i = (Long) entityManager.createQuery("SELECT COUNT (u) FROM User u WHERE u.login=?")
+                                        .setParameter(0, login).getSingleResult();
+        
+        return ( !( i.equals( 0L ) ) );
     }
 
 }

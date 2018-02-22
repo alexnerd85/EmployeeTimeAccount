@@ -12,5 +12,7 @@ import com.alexnerd.employeetimeaccount.data.User;
 
 public interface UserDAO {
     public User addUser(User user);
+   
     public User findUserByLogin(String login);
+    public boolean isLoginExist(String login);
 }

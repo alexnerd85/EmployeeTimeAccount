@@ -15,5 +15,7 @@ import java.util.Set;
 
 public interface UserDAOService {
     public User addUser(String login, String password, boolean enabled, Set<UserRole> userRoles);
+    public User addUser(User user);
     public User findUserByLogin(String login);
+    public boolean isLoginExist(String login);
 }

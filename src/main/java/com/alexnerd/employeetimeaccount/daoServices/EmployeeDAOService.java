@@ -9,7 +9,11 @@
 package com.alexnerd.employeetimeaccount.daoServices;
 
 import com.alexnerd.employeetimeaccount.data.Employee;
+import java.util.List;
 
 public interface EmployeeDAOService {
     public Employee addEmployee(String name, String sirname, String profession, double wage_rate);
+    public Employee addEmployee(Employee employee);
+    public List<Employee> getAllEmployees();
+    public List<Employee> search(String query);
 }
