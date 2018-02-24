@@ -8,6 +8,11 @@
 
 package com.alexnerd.employeetimeaccount.data;
 
+import com.alexnerd.employeetimeaccount.utils.LocalDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,6 +35,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="employees")
+@JsonInclude(Include.NON_NULL)
 public class Employee implements Serializable {
     
     @Id
@@ -58,6 +64,8 @@ public class Employee implements Serializable {
     private double wage_rate;
     
     //дата рождения
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
     @Column(name="birthDate")
     private LocalDate birthDate;
     
@@ -79,6 +87,19 @@ public class Employee implements Serializable {
         this.wage_rate = wage_rate;
     }
 
+    public Employee(String name, String patronymic, String sirname, 
+            String profession, double wage_rate, LocalDate birthDate, 
+            List<Period> periods, Gender gender) {
+        this.name = name;
+        this.patronymic = patronymic;
+        this.sirname = sirname;
+        this.profession = profession;
+        this.wage_rate = wage_rate;
+        this.birthDate = birthDate;
+        //this.periods = periods;
+        this.gender = gender;
+    }
+    
     public Employee(Long id, String name, String patronymic, String sirname, 
             String profession, double wage_rate, LocalDate birthDate, 
             List<Period> periods, Gender gender) {
@@ -189,5 +210,4 @@ public class Employee implements Serializable {
     public enum Gender{
         MAN, WOMAN;
     }
-    
 }

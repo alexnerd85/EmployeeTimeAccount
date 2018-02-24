@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script>
     $(document).ready(function () {
@@ -26,7 +27,7 @@
         });
 
         $.ajax({
-            url: "/EmployeeTimeAccount/employee/getall",
+            url: '<core:url value="/employee/getall"/>',
             data: "{}",
             type: "GET",
 
@@ -37,10 +38,9 @@
 
             success: function (response) {
                 console.log('Response received for employers table', response);
-
                 $('.table').append(
                         $.map(response, function (item, index) {
-                            return '<tr><td>' + response[index].sirname + '</td><td>' + response[index].name + '</td><td>'
+                            return '<tr><label>'+response[index].id+'</label>'+'<td>' + response[index].sirname + '</td><td>' + response[index].name + '</td><td>'
                                     + response[index].patronymic + '</td><td>' + response[index].profession + '</td><td>'
                                     + response[index].wage_rate + '</td><td>' + response[index].birthDate + '</td></tr>';
                         }).join());

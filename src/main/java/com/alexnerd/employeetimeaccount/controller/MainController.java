@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.alexnerd.employeetimeaccount.daoServices.EmployeeDAOService;
 import com.alexnerd.employeetimeaccount.daoServices.UserDAOService;
+import com.alexnerd.employeetimeaccount.data.Employee;
 import com.alexnerd.employeetimeaccount.data.User;
 import com.alexnerd.employeetimeaccount.data.User.UserRole;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +57,10 @@ public class MainController {
         model.addObject("user_aleksey", user);
         //model.addObject("employees", EmployeeSupport.getEmployees());
         //throw new RuntimeException("Test");
+       /* employeeDAOService.addEmployee(new Employee( "Марья", "Ивановна", "Хмельницкая", 
+                "Секретарь", 1000.0, LocalDate.of(1989, 3, 2), null, Employee.Gender.WOMAN));
+        */
+                
         return model;
     }
     
