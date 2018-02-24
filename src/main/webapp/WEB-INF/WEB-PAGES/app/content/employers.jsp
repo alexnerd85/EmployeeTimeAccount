@@ -6,45 +6,90 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="ui basic segment">
-    <div class="ui grid">
-        <div class="fourteen wide column">
-            <table class="ui sortable celled table">
-                <thead>
-                    <tr>
-                        <th>Фамилия</th>
-                        <th>Имя</th>
-                        <th>Отчество</th>
-                        <th>Специальность</th>
-                        <th>Оклад</th>
-                        <th>Дата рождения</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="employee" items="${employees}">
-                    <tr>
-                        <td>${employee.sirname}</td>
-                        <td>${employee.name}</td>
-                        <td>${employee.patronymic}</td>
-                        <td>${employee.profession}</td>
-                        <td>${employee.wage_rate}</td>
-                        <td>${employee.birthDate}</td>
-                    </tr>
-                </c:forEach>
-                <tfoot>
-                    <tr>
-                        <th colspan="6">Количество сотрудников: ${employees.size()}</th>
-                    </tr>
-                </tfoot>
-            </table>
-            <div class="ui right floated small primary labeled icon button">
-                <i class="add user icon"></i> 
-                Добавить
-            </div>    
-        </div>
-    </div>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+<script>
+    $(document).ready(function () {
+        $('table').tablesort();
+
+        $("#search_input").keyup(function () {
+            var value = this.value.toLowerCase().trim();
+
+            $("table tr").each(function (index) {
+                if (!index)
+                    return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var not_found = (id.indexOf(value) === -1);
+                    $(this).closest('tr').toggle(!not_found);
+                    return not_found;
+                });
+            });
+        });
+
+        $.ajax({
+            url: "/EmployeeTimeAccount/employee/getall",
+            data: "{}",
+            type: "GET",
+
+            contentType: "application/json; charset=utf-8",
+
+            dataType: "json",
+            cache: false,
+
+            success: function (response) {
+                console.log('Response received for employers table', response);
+
+                $('.table').append(
+                        $.map(response, function (item, index) {
+                            return '<tr><td>' + response[index].sirname + '</td><td>' + response[index].name + '</td><td>'
+                                    + response[index].patronymic + '</td><td>' + response[index].profession + '</td><td>'
+                                    + response[index].wage_rate + '</td><td>' + response[index].birthDate + '</td></tr>';
+                        }).join());
+
+
+            },
+            error: function (response) {
+                console.log('Error while receiving response for employers table', response);
+            }
+        });
+    });
+
+</script>
+
+<div class="ui input">
+    <input id="search_input" type="text" placeholder="Найти...">
 </div>
+<table class="ui sortable selectable celled table">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Специальность</th>
+            <th>Оклад</th>
+            <th>Дата рождения</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        </c:forEach>
+    <tfoot>
+        <tr><th colspan="6">
+                <div class="ui right floated pagination menu">
+                    <a class="icon item">
+                        <i class="left chevron icon"></i>
+                    </a>
+                    <a class="item">1</a>
+                    <a class="item">2</a>
+                    <a class="item">3</a>
+                    <a class="item">4</a>
+                    <a class="icon item">
+                        <i class="right chevron icon"></i>
+                    </a>
+                </div>
+            </th>
+        </tr></tfoot>
+</table>
+<div class="ui right floated small primary labeled icon button">
+    <i class="add user icon"></i> 
+    Добавить
+</div>    

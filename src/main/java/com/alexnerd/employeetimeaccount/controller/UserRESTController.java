@@ -52,8 +52,10 @@ public class UserRESTController {
         return userDAOService.isLoginExist(login);
     }
     
+    
     @ExceptionHandler(JDBCException.class)
     public ResponseEntity restException(JDBCException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage() + " " + ex.getSQLException().getMessage());
     }
+    
 }

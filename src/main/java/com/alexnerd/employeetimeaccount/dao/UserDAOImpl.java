@@ -34,8 +34,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User findUserByLogin(String login) {
          return (User) entityManager
-                 .createQuery("FROM User u WHERE u.login=?")
-                 .setParameter(0, login)
+                 .createQuery("FROM User u WHERE u.login = :login")
+                 .setParameter("login", login)
                  .getResultList()
                  .stream()
                  .findFirst()
@@ -46,8 +46,8 @@ public class UserDAOImpl implements UserDAO {
     @Transactional(readOnly = true)
     @Override
     public boolean isLoginExist(String login) {
-        Long i = (Long) entityManager.createQuery("SELECT COUNT (u) FROM User u WHERE u.login=?")
-                                        .setParameter(0, login).getSingleResult();
+        Long i = (Long) entityManager.createQuery("SELECT COUNT (u) FROM User u WHERE u.login = :login")
+                                        .setParameter("login", login).getSingleResult();
         
         return ( !( i.equals( 0L ) ) );
     }

@@ -89,8 +89,7 @@
             <div class="ui container">
                 <div class="item">
                     <H4>
-                        <i class="tachometer alternate icon"></i>
-                        Главная
+                        EmployeeTimeAccount
                     </h4>
                 </div>
                 <div class="item align right">

@@ -43,7 +43,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> search(String query) {
         return (List<Employee>) entityManager
-                 .createQuery("FROM Employee e WHERE CONCAT(e.name, e.sirname, e.profession) LIKE CONCAT('%',UPPER(?),'%')").setParameter(0, query)
+                 .createQuery("FROM Employee e WHERE CONCAT(e.name, e.sirname, e.profession) LIKE CONCAT('%',UPPER(:query),'%')").setParameter("query", query)
                  .getResultList();
         
     }
