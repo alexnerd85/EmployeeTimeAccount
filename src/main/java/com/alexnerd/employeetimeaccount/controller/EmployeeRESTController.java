@@ -39,6 +39,11 @@ public class EmployeeRESTController {
         return employeeDAOService.getAllEmployees();
     }
     
+    @GetMapping(value="getbyid", produces=MediaType.APPLICATION_JSON_VALUE)
+    public Employee getById(@RequestParam("id") Long id){
+        return employeeDAOService.getEmployeeById(id);
+    }
+    
     @GetMapping(value="search", produces=MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> search(@RequestParam("q") String query){
         return employeeDAOService.search(query);

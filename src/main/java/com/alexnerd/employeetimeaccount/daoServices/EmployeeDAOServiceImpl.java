@@ -47,4 +47,10 @@ public class EmployeeDAOServiceImpl implements EmployeeDAOService {
     public List<Employee> search(String query) {
         return employeeDAO.search(query);
     }
+    
+    @Override
+    @Transactional
+    public Employee getEmployeeById(Long id) {
+        return employeeDAO.getEmployeeById(id);
+    }
 }

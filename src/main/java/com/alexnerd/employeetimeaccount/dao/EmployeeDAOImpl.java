@@ -47,4 +47,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                  .getResultList();
         
     }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public Employee getEmployeeById(Long id){
+        return (Employee) entityManager.createQuery("FROM Employee e WHERE e.id=:id")
+                .setParameter("id", id)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
 }

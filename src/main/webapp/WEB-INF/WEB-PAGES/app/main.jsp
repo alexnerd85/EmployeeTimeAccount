@@ -24,7 +24,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('table').tablesort();
-
+                
                 $('.pusher').load("<c:url value="/dashboard"/>");
 
                 $('a').on('click', function (e) {

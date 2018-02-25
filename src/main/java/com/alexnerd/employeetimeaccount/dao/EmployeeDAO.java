@@ -15,4 +15,5 @@ public interface EmployeeDAO {
     public Employee addEmployee(Employee employee);
     public List<Employee> getAllEmployees();
     public List<Employee> search(String query);
+    public Employee getEmployeeById(Long id);
 }

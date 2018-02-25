@@ -7,7 +7,7 @@ function callPage(pageRefInput){
         dataType: "text",
     
         success: function(response){
-            console.log('The page was loaded', response);
+            console.log('The page was loaded');
             $('.pusher').html(response);
         },
     
