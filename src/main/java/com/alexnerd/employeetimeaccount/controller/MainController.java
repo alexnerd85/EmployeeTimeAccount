@@ -45,23 +45,23 @@ public class MainController {
 
     //@RequestMapping(value="/app/main")
     @RequestMapping(value="/")
-    public ModelAndView getTestJsp(){
-        ModelAndView model = new ModelAndView("app/main");
+    public String getMain(){
+        //ModelAndView model = new ModelAndView("app/main");
         //employeeDAOService.addEmployee("Василий", "Пупкин", "Водитель", 2);
         //UserRole role = new UserRole();
         //role.setRole("USER");
-        Set<UserRole> set = new HashSet<>();
-        set.add(UserRole.USER);
+        //Set<UserRole> set = new HashSet<>();
+        //set.add(UserRole.USER);
         //userDAOService.addUser("user", "password", true, set);
-        User user = userDAOService.findUserByLogin("aleksey");
-        model.addObject("user_aleksey", user);
+        //User user = userDAOService.findUserByLogin("aleksey");
+        //model.addObject("user_aleksey", user);
         //model.addObject("employees", EmployeeSupport.getEmployees());
         //throw new RuntimeException("Test");
        /* employeeDAOService.addEmployee(new Employee( "Марья", "Ивановна", "Хмельницкая", 
                 "Секретарь", 1000.0, LocalDate.of(1989, 3, 2), null, Employee.Gender.WOMAN));
         */
                 
-        return model;
+        return "app/main";
     }
     
     @RequestMapping(value="/dashboard")

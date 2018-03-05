@@ -5,6 +5,7 @@
  *   Email      : alexnerd85@gmail.com
  *   GitHub     : https://github.com/alexnerd85/EmployeeTimeAccount
  */
+
 package com.alexnerd.employeetimeaccount.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -43,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionFixation().changeSessionId()
                 .and().exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+                //.and().requiresChannel().antMatchers("/login").requiresSecure()
                 .and().csrf().disable();
     }
 

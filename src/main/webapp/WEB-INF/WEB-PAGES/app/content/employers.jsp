@@ -12,10 +12,56 @@
         $('table').tablesort();
 
         $(document).on("dblclick", "table tbody tr", function () {
-            //alert($(this).closest('tr').attr('id'));
-            $('.ui.modal')
+            var employee = getEmployeeByID('<core:url value="/employee/getbyid"/>', $(this).closest('tr').attr('id'));
+            populateEmployeeForm('#employeeinfo', $.parseJSON(employee));
+
+            $('.ui.modal.employeeinfo')
                     .modal('setting', 'transition', "fade up")
                     .modal('show');
+        });
+
+        $(document).on("click", "table tbody tr", function () {
+            $('tr.active').removeClass('active');
+            $(this).closest('tr').addClass('active');
+        });
+
+        /*
+         $('body').not('p').click(function(){
+         $('tr.active').removeClass('active');
+         });
+         */
+
+        $('#addemployee').click(function () {
+            $('.ui.modal.newemployee')
+                    .modal('setting', 'transition', "fade up")
+                    .modal('show');
+        });
+
+        $('#deleteemployee').click(function () {
+            //var employee = deleteEmployeeByID('<core:url value="/employee/getbyid"/>', $('table tbody tr').closest('tr.active').attr('id'));
+            //alert(employee);
+            if ($('table tbody tr').closest('tr.active').length) {
+                $('.ui.modal.deleteemployee')
+                        .modal({
+                            closable: false,
+                            onDeny: function () {
+                                //window.alert('Wait not yet!');
+                                //return false;
+                            },
+                            onApprove: function () {
+                                //window.alert($('table tbody tr').closest('tr.active').attr('id'));
+                                let id = $('table tbody tr').closest('tr.active').attr('id');
+                                let res = deleteEmployeeByID('<core:url value="/employee/deletebyid"/>', id);
+                                if (res === 'true')
+                                    $('table tbody tr').closest('tr.active').remove();
+                            }
+                        })
+                        .modal('show');
+            } else {
+                $('.tiny.modal')
+                        .modal('show');
+            }
+
         });
 
         $("#search_input").keyup(function () {
@@ -70,7 +116,7 @@
             <th>Имя</th>
             <th>Отчество</th>
             <th>Специальность</th>
-            <th>Оклад</th>
+            <th>Количество ставок</th>
             <th>Дата рождения</th>
         </tr>
     </thead>
@@ -96,28 +142,124 @@
         </tfoot>
     --%>
 </table>
-<div class="ui right floated small primary labeled icon button">
-    <i class="add user icon"></i> 
-    Добавить
+<div class="ui right floated buttons">
+    <div id="addemployee" class="ui small primary labeled icon button">
+        <i class="add user icon"></i> 
+        Добавить
+    </div>
+
+    <div class="or" data-text="и"></div>
+
+    <div id="deleteemployee" class="ui small negative right labeled icon button">
+        <i class="trash alternate outline icon"></i> 
+        Удалить
+    </div>
+
 </div>
-<div class="ui modal">
+
+
+<!-- Подтверждение удаления информации о работнике -->
+
+<div class="ui small basic modal deleteemployee">
+    <div class="ui icon header">
+        <i class="archive icon"></i>
+        Удаление записи
+    </div>
+    <div class="content">
+        <p>Вы действительно хотите удалить информацию о работнике? 
+            Удаленные данные восстановить будет невозможно!</p>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            Нет
+        </div>
+        <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            Да
+        </div>
+    </div>
+</div>
+
+
+<!-- Не выбран работник для удаления -->
+
+<div class="ui tiny modal">
+    <div class="header">
+        Не выбрана запись
+    </div>
+    <div class="content">
+        Для удаления информации о работнике, 
+        щелкните мышкой в таблице на нужном работнике и нажмите кнопку "Удалить"
+    </div>
+    <div class="actions">
+        <div class="ui positive icon button">
+            <i class="checkmark icon"></i>
+            Хорошо
+        </div>
+    </div>
+</div>
+
+
+<!-- Добавить работника -->
+
+<div class="ui modal newemployee">
     <i class="close icon"></i>
     <div class="header">
-        <i class="address book outline icon"></i>
-        Сведения о работнике
+        <i class="add user icon"></i>
+        Добавить работника
     </div>
-    <div class="image content">
-        <div class="image">
-            An image can appear on left or an icon
-        </div>
-        <div class="description">
-            A description can appear on the right
+    <div class="content">
+        <div id="EmployeeForm" class="ui form" method="POST" action="<core:url value="/employee/add"/>">
+            <div class="field">
+                <div class="three fields">
+                    <div class="required field">
+                        <label>Фамилия</label>
+                        <input type="text" name="sirname" placeholder="Фамилия">
+                    </div>
+                    <div class="required field">
+                        <label>Имя</label>
+                        <input type="text" name="name" placeholder="Имя">
+                    </div>
+                    <div class="field">
+                        <label>Отчество</label>
+                        <input type="text" name="patronymic" placeholder="Отчество">
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="three fields">
+                    <div class="field">
+                        <label>Дата рождения</label>
+                        <input type="text" name="birthDate" placeholder="Дата рождения">
+                    </div>
+                    <div class="required field">
+                        <label>Специальность</label>
+                        <input type="text" name="profession" placeholder="Специальность">
+                    </div>
+                    <div class="required field">
+                        <label>Количество ставок</label>
+                        <input type="text" name="wage_rate" placeholder="Количество ставок">
+                    </div>
+                    <div class="required field">
+                        <label>Пол</label>
+                        <select>
+                            <option value="">Пол</option>
+                            <option value="MAN">Мужчина</option>
+                            <option value="WOMAN">Женщина</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="required inline field">
+                <label>Поля обязательные для заполнения</label>
+            </div>
         </div>
     </div>
     <div class="actions">
-        <div class="ui negative button">Отмена</div>
+        <div class="ui black deny button">Отмена</div>
         <div class="ui positive right labeled icon button">
-            Сохранить
+            Добавить
             <i class="checkmark icon"></i>
         </div>
     </div>

@@ -35,6 +35,18 @@ public class EmployeeDAOServiceImpl implements EmployeeDAOService {
     public Employee addEmployee(Employee employee) {
         return employeeDAO.addEmployee(employee);        
     }
+    
+    @Override
+    @Transactional
+    public void deleteEmployee(Employee employee) {
+        employeeDAO.deleteEmployee(employee);        
+    }
+    
+    @Override
+    @Transactional
+    public boolean deleteEmployee(Long id) {
+        return employeeDAO.deleteEmployee(id);        
+    }
 
     @Override
     @Transactional

@@ -20,11 +20,13 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/Semantic-UI-CSS-master/semantic.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/tablesort.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/loadpage.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/employeeREST.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/employeeForm.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/Chart.bundle.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('table').tablesort();
-                
+
                 $('.pusher').load("<c:url value="/dashboard"/>");
 
                 $('a').on('click', function (e) {
@@ -42,11 +44,9 @@
                             apiSettings: {
                                 url: '<c:url value="/employee/search?q={query}"/>',
                                 onResponse: function (serverResponse) {
-                                    var
-                                            response = {
-                                                results: {}
-                                            }
-                                    ;
+                                    var response = {
+                                        results: {}
+                                    };
                                     if (!serverResponse) {
                                         return;
                                     }
@@ -70,15 +70,22 @@
                                         response.results[profession].results.push({
                                             title: item.sirname + ' ' + item.name,
                                             description: item.profession,
-                                            url: item.html_url
+                                            id: item.id
                                         });
                                     });
                                     return response;
                                 }
+
+                            },
+                            onSelect: function (result) {
+                                //console.log(result.id);
+                                populateEmployeeForm('#EmployeeForm',
+                                        $.parseJSON(getEmployeeByID('<c:url value="/employee/getbyid"/>', result.id)));
+                                $('.ui.modal.employeeinfo')
+                                        .modal('setting', 'transition', "fade up")
+                                        .modal('show');
                             }
-                        })
-
-
+                        });
             });
 
         </script>
@@ -98,7 +105,7 @@
                             <input class="prompt" type="text" placeholder="Найти...">
                             <i class="search icon"></i>
                         </div>
-                        <div class="results"></div>
+                        <div id="searchResults" class="results"></div>
                     </div>
                 </div>
                 <div class="item">
@@ -147,5 +154,56 @@
 
         </div>
 
+        <div id="employeeinfo" class="ui modal employeeinfo">
+            <i class="close icon"></i>
+            <div class="header">
+                <i class="address book outline icon"></i>
+                Сведения о работнике
+            </div>
+            <div class="content">
+                <div id="EmployeeForm" class="ui form">
+                    <div class="field">
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Фамилия</label>
+                                <input type="text" name="sirname" placeholder="Фамилия">
+                            </div>
+                            <div class="field">
+                                <label>Имя</label>
+                                <input type="text" name="name" placeholder="Имя">
+                            </div>
+                            <div class="field">
+                                <label>Отчество</label>
+                                <input type="text" name="patronymic" placeholder="Отчество">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Дата рождения</label>
+                                <input type="text" name="birthDate" placeholder="Дата рождения">
+                            </div>
+                            <div class="field">
+                                <label>Специальность</label>
+                                <input type="text" name="profession" placeholder="Специальность">
+                            </div>
+                            <div class="field">
+                                <label>Количество ставок</label>
+                                <input type="text" name="wage_rate" placeholder="Количество ставок">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui black deny button">Отмена</div>
+                <div class="ui positive right labeled icon button">
+                    Сохранить
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

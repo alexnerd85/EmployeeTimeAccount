@@ -54,4 +54,11 @@ public class EmployeeRESTController {
         return true;
     }
     
+    @PostMapping(value="deletebyid", produces=MediaType.APPLICATION_JSON_VALUE)
+    public boolean deleteByID(@RequestParam("id") Long id){
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(id);
+        return employeeDAOService.deleteEmployee(id);
+    }
+    
 }

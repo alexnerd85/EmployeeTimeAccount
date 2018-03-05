@@ -17,21 +17,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="employees")
@@ -74,6 +67,7 @@ public class Employee implements Serializable {
     
     //пол
     @Enumerated(EnumType.ORDINAL)
+    @Column(name="gender", nullable=false)
     private Gender gender;
 
     public Employee() {
