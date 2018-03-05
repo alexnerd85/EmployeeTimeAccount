@@ -11,14 +11,14 @@ package com.alexnerd.employeetimeaccount.config;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -72,6 +72,11 @@ public class ApplicationContext {
         return new HibernateJpaVendorAdapter();
     }
 
+    @Bean
+    public BeanPostProcessor persistenceTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+    
     private Properties getJpaProperties() {
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");

@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeDAOImpl implements EmployeeDAO {
 
     @PersistenceContext
-    public EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Transactional(readOnly = false)
     @Override
